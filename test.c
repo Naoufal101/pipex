@@ -123,7 +123,9 @@ char    **clean(char **str)
     {
         c++;
     }
+    free(str[0]);
 
+    i = 1;
     while (str[i])
     {
         j = 0;
@@ -156,7 +158,7 @@ char    **clean(char **str)
     }
 
     free(ca);
-    i = 0;
+    i = 1;
     while (str[i])
     {
         j = 0;
@@ -261,6 +263,12 @@ int     main(int argc, char **argv, char **env)
                 else
                 {
                     cml = ft_split_p(argv[3]);
+                    i = 0;
+                    while (cml[i])
+                    {
+                        printf("\n%s.\n", cml[i]);
+                        i++;
+                    }
                     dup2(fd, 1);
                     close(fd);
                     close(pipes[1]);

@@ -113,9 +113,17 @@ char    **clean(char **str)
     int i;
     int c;
     char **dp;
+    char **ca;
 
     i = 0;
     c = 0;
+
+    ca = ft_split(str[0], ' ');
+    while (ca[c])
+    {
+        c++;
+    }
+
     while (str[i])
     {
         j = 0;
@@ -140,6 +148,15 @@ char    **clean(char **str)
     dp[c] = 0;
     i = 0;
     c = 0;
+    while(ca[i])
+    {
+        dp[c] = ca[i];
+        c++;
+        i++;
+    }
+
+    free(ca);
+    i = 0;
     while (str[i])
     {
         j = 0;

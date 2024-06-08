@@ -82,30 +82,55 @@ void	ft_pipe(t_var *variable)
 	}
 }
 
+void	pipe_exc(char *cmd, char **env)
+{
+	pid_t	pid;
+	int		p_fd[2];
+
+	if (pipe(p_fd) == -1)
+		exit(0);
+	pid = fork();
+	if (pid == -1)
+		exit(0);
+	if (pid == 0)
+	{
+		close(p_fd[0]);
+		dup2(p_fd[1], 1);
+		variable->cml = ft_split_p(argv[2]);
+		if (!variable->cml)
+			exit(1);
+		child(variable->cml, variable->paths, &(variable->valid_path), env);
+	}
+	else
+	{
+		close(p_fd[1]);
+		dup2(p_fd[0], 0);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_var	variable;
 	int		fork_s;
+	int i;
+	int fd;
 
 	variable.cml = 0;
 	variable.valid_path = 0;
 	variable.paths = find_path(env);
 	if (!variable.paths)
 		return (1);
-	if (argc == 5)
+	if (argc >= 5)
 	{
-		ft_pipe(&variable);
-		fork_s = fork();
-		if (fork_s == -1)
-		{
-			perror("");
-			ft_free(variable.paths);
-			return (1);
-		}
-		else if (fork_s == 0)
-			first_child(&variable, argv, env);
-		else if (fork() == 0)
-			second_child(&variable, argv, env);
+		i = 2;
+		fd_in = open_file(av[1], 0);
+		fd_out = open_file(av[ac - 1], 1);
+		dup2(fd_in, 0);
+	
+		while (i < ac - 2)
+			pipe_exc(av[i++], env);
+		dup2(fd_out, 1);
+		exec(av[ac - 2], env);
 	}
 	return (ft_exit(variable));
 }

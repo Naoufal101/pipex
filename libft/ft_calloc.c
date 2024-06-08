@@ -15,9 +15,7 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*str;
-	int		f;
 
-	f = 0;
 	if (count != 0 && size != 0)
 	{
 		if (count > 9223372036854775807 / size)

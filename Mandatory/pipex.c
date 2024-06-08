@@ -32,7 +32,7 @@ void	first_child(t_var *variable, char **argv, char **env)
 		variable->cml = ft_split_p(argv[2]);
 		if (!variable->cml)
 			exit(1);
-		child(variable->cml, variable->paths, &(variable->valid_path), env);
+		child(variable->cml, variable->paths, env);
 	}
 }
 
@@ -56,7 +56,7 @@ void	second_child(t_var *variable, char **argv, char **env)
 		variable->cml = ft_split_p(argv[3]);
 		if (!variable->cml)
 			exit(1);
-		child(variable->cml, variable->paths, &(variable->valid_path), env);
+		child(variable->cml, variable->paths, env);
 	}
 }
 
@@ -87,8 +87,6 @@ int	main(int argc, char **argv, char **env)
 	t_var	variable;
 	int		fork_s;
 
-	variable.cml = 0;
-	variable.valid_path = 0;
 	variable.paths = find_path(env);
 	if (!variable.paths)
 		return (1);

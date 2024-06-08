@@ -19,12 +19,13 @@
 # include <stdlib.h>
 // fork
 # include <unistd.h>
+//remove
+#include <sys/wait.h>
 
 typedef struct s_var
 {
 	char	**cml;
 	char	**paths;
-	char	*valid_path;
 	int		pipes[2];
 	int		status;
 	int		exit;
@@ -36,6 +37,6 @@ char		**find_path(char **env);
 char		**clean(char **str);
 char		**ft_split_p(char *str);
 int			search_count(char *str, char c);
-void		child(char **cml, char **paths, char **valid_path, char **env);
+void		child(char **cml, char **paths, char **env);
 void		ft_dup2(int cfd, int fd);
 #endif

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 11:34:51 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 11:34:55 by nhimad           ###   ########.fr       */
+/*   Created: 2024/06/08 19:11:09 by nhimad            #+#    #+#             */
+/*   Updated: 2024/06/08 19:11:50 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	ft_mini_copy(char **dp, char **ca)
 {

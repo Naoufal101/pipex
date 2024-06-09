@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 11:36:05 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 11:36:08 by nhimad           ###   ########.fr       */
+/*   Created: 2024/06/08 19:10:38 by nhimad            #+#    #+#             */
+/*   Updated: 2024/06/09 18:52:27 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_free(char **str)
 {
@@ -62,4 +62,18 @@ void	ft_dup2(int cfd, int fd)
 		perror("");
 		exit(1);
 	}
+}
+
+int	ft_exit(t_var variable)
+{
+	int	s;
+	int	status;
+
+	s = 127;
+	close(0);
+	while (wait(&status) > 0)
+		if (status == 0)
+			s = 0;
+	ft_free(variable.paths);
+	exit(s);
 }

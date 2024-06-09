@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 11:35:01 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 11:35:04 by nhimad           ###   ########.fr       */
+/*   Created: 2024/06/08 19:09:47 by nhimad            #+#    #+#             */
+/*   Updated: 2024/06/09 00:03:32 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	command_search(char **cml, char **paths, char **valid_path)
 {
@@ -52,14 +52,16 @@ void	child_error(char **cml, char **paths)
 	exit(1);
 }
 
-void	child(char **cml, char **paths, char **valid_path, char **env)
+void	child(char **cml, char **paths, char **env)
 {
-	int	i;
+	char	*valid_path;
+	int		i;
 
 	i = 0;
+	valid_path = 0;
 	if (access(cml[0], F_OK) == -1 && cml[0][0] != '/' && paths[i])
 	{
-		i = command_search(cml, paths, valid_path);
+		i = command_search(cml, paths, &valid_path);
 		if (!paths[i])
 		{
 			ft_putstr_fd(cml[0] + 1, 2);
@@ -67,9 +69,9 @@ void	child(char **cml, char **paths, char **valid_path, char **env)
 		}
 		else
 		{
-			execve(valid_path[0], cml, env);
-			perror(valid_path[0]);
-			free(valid_path[0]);
+			execve(valid_path, cml, env);
+			perror(valid_path);
+			free(valid_path);
 		}
 		child_error(cml, paths);
 	}

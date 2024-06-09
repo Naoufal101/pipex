@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:08:22 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 11:10:23 by nhimad           ###   ########.fr       */
+/*   Updated: 2024/06/09 00:03:18 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	child_error(char **cml, char **paths)
 
 void	child(char **cml, char **paths, char **env)
 {
-	int	i;
-	char *valid_path;
+	int		i;
+	char	*valid_path;
 
 	i = 0;
 	valid_path = 0;

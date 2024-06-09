@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:51:00 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 10:55:36 by nhimad           ###   ########.fr       */
+/*   Updated: 2024/06/09 00:01:31 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 // fork
 # include <unistd.h>
-//remove
-#include <sys/wait.h>
 
 typedef struct s_var
 {

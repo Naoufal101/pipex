@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:51:07 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/07 11:30:48 by nhimad           ###   ########.fr       */
+/*   Updated: 2024/06/09 16:55:29 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,14 @@ int	main(int argc, char **argv, char **env)
 		if (fork_s == -1)
 		{
 			perror("");
-			ft_free(variable.paths);
-			return (1);
+			return (ft_exit(variable));
 		}
 		else if (fork_s == 0)
 			first_child(&variable, argv, env);
 		else if (fork() == 0)
 			second_child(&variable, argv, env);
 	}
+	else
+		ft_putendl_fd("Invalid number of arguments", 2);
 	return (ft_exit(variable));
 }

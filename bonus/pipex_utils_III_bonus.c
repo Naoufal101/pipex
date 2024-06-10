@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:49:12 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/09 18:58:50 by nhimad           ###   ########.fr       */
+/*   Updated: 2024/06/10 15:59:51 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	open_error(char *str, int fd, int d_fd)
 	if (fd == -1)
 	{
 		perror(str);
-		return (1);
+		return (fd);
 	}
 	ft_dup2(fd, d_fd);
 	close(fd);
@@ -58,4 +58,14 @@ int	ft_open(char *str, int key)
 			exit(1);
 	}
 	return (0);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s2[i] == s1[i])
+		i++;
+	return ((int)(s1[i] - s2[i]));
 }

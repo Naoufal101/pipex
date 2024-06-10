@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:11:32 by nhimad            #+#    #+#             */
-/*   Updated: 2024/06/09 18:49:58 by nhimad           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:25:43 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,23 @@ void	pipe_exc(char *cmd, char **env, t_var *variable)
 void	here_doc_child(char *limiter, int *p_fd)
 {
 	char	*str;
+	int		len;
 
+	close(p_fd[0]);
 	str = get_next_line(0);
-	while (ft_strncmp(str, limiter, (ft_strlen(str) - 1)))
+	len = ft_strlen(str);
+	if (len)
+		str[len - 1] = 0;
+	while (ft_strcmp(str, limiter))
 	{
-		close(p_fd[0]);
-		write(p_fd[1], str, ft_strlen(str));
+		ft_putendl_fd(str, p_fd[1]);
+		free(str);
 		str = get_next_line(0);
+		len = ft_strlen(str);
+		if (len)
+			str[len - 1] = 0;
 	}
+	free(str);
 	exit(0);
 }
 
@@ -73,6 +82,7 @@ void	here_doc(char *limiter, int ac, t_var variable)
 		here_doc_child(limiter, p_fd);
 	else
 	{
+		wait(NULL);
 		close(p_fd[1]);
 		ft_dup2(p_fd[0], 0);
 		close(p_fd[0]);
@@ -84,7 +94,7 @@ void	ft_pipex(int argc, char **argv, char **env, t_var variable)
 	int	i;
 
 	i = 2;
-	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])))
+	if (!ft_strcmp(argv[1], "here_doc"))
 	{
 		here_doc(argv[2], argc, variable);
 		ft_open(argv[argc - 1], 3);

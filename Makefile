@@ -11,24 +11,23 @@ BTARGET = pipex_bonus
 
 CFLAGS = -Wall -Werror -Wextra
 OFILES = $(FILES:.c=.o)
-BFILES = $(BFILES:.c=.o)
+OBFILES = $(BFILES:.c=.o)
 
 all: $(NAME)
-bonus: $(BTARGET)
 
 $(LIBRARY):
-	@make -C $(INC) all clean
+	@make re -C $(INC)
 
 $(NAME): $(LIBRARY) $(OFILES) $(HEADER)
-	$(CC) $(OFILES) $(LIBRARY) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBRARY) -o $(NAME)
 
-$(BTARGET): $(LIBRARY) $(BOFILES) $(BHEADER)
-	$(CC) $(BOFILES) $(LIBRARY) -o $(BTARGET)
+bonus: $(LIBRARY) $(OBFILES) $(BHEADER)
+	$(CC) $(CFLAGS) $(OBFILES) $(LIBRARY) -o $(NAME)
 
 clean:
-	$(RM) $(OFILES)
+	$(RM) $(OFILES) $(OBFILES)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBRARY)
+	$(RM) $(NAME) $(LIBRARY) $(BTARGET)
 
 re: fclean all
